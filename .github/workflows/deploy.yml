@@ -9,7 +9,7 @@ env:
  PROJECT_NAME: Test_GitHubActions 
  ORCH_FOLDER: Shared
  ORCH_URL: ${{ secrets.ORCHESTRATOR_URL }}
- ORCH_TENANT: ${{ secrets.UIPATHTENANTNAME }}
+ ORCH_TENANT: ${{ secrets.TENANT_NAME }}
  ORCH_CLIENT_ID: ${{ secrets.UIPATHCLIENTID }}
  ORCH_USER_KEY: ${{ secrets.UIPATHUSERKEY }}
  ORCH_ACC_NAME: ${{ secrets.UIPATHACCOUNTNAME }}
