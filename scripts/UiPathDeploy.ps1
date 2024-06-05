@@ -88,12 +88,12 @@ $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 $debugLog = "$scriptPath\orchestrator-package-deploy.log"
 
 #Verifying UiPath CLI folder
-$uipathCLI = "$scriptPath\uipathcli\lib\net461\uipcli.exe"
+$uipathCLI = $scriptPath\uipathcli\tools\uipcli.exe"
 if (-not(Test-Path -Path $uipathCLI -PathType Leaf)) {
     WriteLog "UiPath CLI does not exist in this folder. Attempting to download it..."
     try {
         New-Item -Path "$scriptPath" -ItemType "directory" -Name "uipathcli";
-        Invoke-WebRequest "https://www.myget.org/F/uipath-dev/api/v2/package/UiPath.CLI/1.0.7802.11617" -OutFile "$scriptPath\\uipathcli\\cli.zip";
+        Invoke-WebRequest "https://uipath.pkgs.visualstudio.com/Public.Feeds/_apis/packaging/feeds/1c781268-d43d-45ab-9dfc-0151a1c740b7/nuget/packages/UiPath.CLI.Windows/versions/23.10.8753.32995/content" -OutFile "$scriptPath\\uipathcli\\cli.zip";
         Expand-Archive -LiteralPath "$scriptPath\\uipathcli\\cli.zip" -DestinationPath "$scriptPath\\uipathcli";
         WriteLog "UiPath CLI is downloaded and extracted in folder $scriptPath\\uipathcli"
         if (-not(Test-Path -Path $uipathCLI -PathType Leaf)) {
