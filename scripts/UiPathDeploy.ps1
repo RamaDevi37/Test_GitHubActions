@@ -88,7 +88,7 @@ $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 $debugLog = "$scriptPath\orchestrator-package-deploy.log"
 
 #Verifying UiPath CLI folder
-$uipathCLI = $scriptPath\uipathcli\tools\uipcli.exe"
+$uipathCLI = "$scriptPath\uipathcli\tools\uipcli.exe"
 if (-not(Test-Path -Path $uipathCLI -PathType Leaf)) {
     WriteLog "UiPath CLI does not exist in this folder. Attempting to download it..."
     try {
