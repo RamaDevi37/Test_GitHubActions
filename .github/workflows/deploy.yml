@@ -96,7 +96,7 @@ jobs:
         git config --global user.email 'ramadevi.rd37@gmail.com'
         git add project.json
         git commit -m "Increment UiPath project version"
- 
+        git push 
 
     - name: Debug Info
       run: |
@@ -104,12 +104,7 @@ jobs:
        git status
        cat .git/config
 
-    - name: Push changes
-      uses: ad-m/github-push-action@v0.6.0
-      with:
-        github_token: ${{ secrets.TOKEN_GITHUB }}
-        branch: main
- 
+
 
         
  
