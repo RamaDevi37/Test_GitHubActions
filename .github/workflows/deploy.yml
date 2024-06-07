@@ -30,6 +30,7 @@ jobs:
           echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
           echo "GITHUB_SHA: ${GITHUB_SHA}"
           echo "GITHUB_REF: ${GITHUB_REF}"
+          echo "GITHUB_Token: ${{ secrets.TOKEN_GITHUB }}"
  cleaner:
     runs-on: ubuntu-latest
     steps:
@@ -96,7 +97,6 @@ jobs:
         git commit -m "Increment UiPath project version"
  
     - name: Push changes
-        echo ${{ secrets.TOKEN_GITHUB }}
       uses: ad-m/github-push-action@v0.6.0
       with:
         github_token: ${{ secrets.TOKEN_GITHUB }}
