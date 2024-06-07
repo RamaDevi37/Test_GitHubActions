@@ -92,17 +92,23 @@ jobs:
  
     - name: Commit changes
       run: |
-        git config --global user.name 'github-actions'
-        git config --global user.email 'github-actions@github.com'
+        git config --global user.name 'RamaDevi37'
+        git config --global user.email 'ramadevi.rd37@gmail.com'
         git add project.json
         git commit -m "Increment UiPath project version"
-        git push
+ 
 
     - name: Debug Info
       run: |
        git remote -v
        git status
        cat .git/config
+
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.TOKEN_GITHUB }}
+        branch: main
  
 
         
