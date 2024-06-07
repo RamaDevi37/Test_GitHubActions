@@ -96,6 +96,7 @@ jobs:
         git commit -m "Increment UiPath project version"
  
     - name: Push changes
+        echo ${{ secrets.TOKEN_GITHUB }}
       uses: ad-m/github-push-action@v0.6.0
       with:
         github_token: ${{ secrets.TOKEN_GITHUB }}
