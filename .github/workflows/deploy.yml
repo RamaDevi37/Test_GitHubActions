@@ -31,7 +31,7 @@ jobs:
           echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
           echo "GITHUB_SHA: ${GITHUB_SHA}"
           echo "GITHUB_REF: ${GITHUB_REF}"
-          echo "GITHUB_Token: ${{ secrets.TOKEN_GITHUB }}"
+
  cleaner:
     runs-on: ubuntu-latest
     steps:
@@ -98,11 +98,6 @@ jobs:
         git commit -m "Increment UiPath project version"
         git push 
 
-    - name: Debug Info
-      run: |
-       git remote -v
-       git status
-       cat .git/config
 
 
 
