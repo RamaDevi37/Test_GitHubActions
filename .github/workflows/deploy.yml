@@ -1,4 +1,4 @@
-name: Deploy workflow
+name: Update Version Workflow
 
 on:
   push:
@@ -6,32 +6,7 @@ on:
       - main
   workflow_dispatch:
 
-env:
- PROJECT_NAME: Test_GitHubActions 
- ORCH_FOLDER: Shared
- ORCH_URL: ${{ secrets.ORCHESTRATOR_URL }}
- ORCH_TENANT: ${{ secrets.TENANT_NAME }}
- ORCH_CLIENT_ID: ${{ secrets.UIPATHCLIENTID }}
- ORCH_USER_KEY: ${{ secrets.UIPATHUSERKEY }}
- ORCH_ACC_NAME: ${{ secrets.UIPATHACCOUNTNAME }}
- CLI_URL: https://uipath.visualstudio.com/Public.Feeds/_artifacts/feed/UiPath-Official/NuGet/UiPath.CLI.Windows/overview/23.10.8894.39673
-
 jobs:
- print-details:
-    runs-on: ubuntu-latest
-    steps:
-      - name: echo-default-env-variables
-        run: |
-          echo "Home: ${HOME}"
-          echo "GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}"
-          echo "GITHUB_ACTIONS: ${GITHUB_ACTIONS}"
-          echo "GITHUB_ACTOR: ${GITHUB_ACTOR}"
-          echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
-          echo "GITHUB_EVENT_NAME: ${GITHUB_EVENT_NAME}"
-          echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
-          echo "GITHUB_SHA: ${GITHUB_SHA}"
-          echo "GITHUB_REF: ${GITHUB_REF}"
-
  cleaner:
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +14,7 @@ jobs:
         run: |
           echo "Cleaning up previous run"
           rm -rf "${{ github.workspace }}"
- update_version_build-uipath-nuget-package:
+ update_version:
     runs-on: ubuntu-latest
  
     steps:
@@ -97,33 +72,5 @@ jobs:
         git add project.json
         git commit -m "Increment UiPath project version"
         git push 
-        
-    - name: Build Nuget Package
-      shell: pwsh
-      run: ${{ github.workspace }}\scripts\UiPathPack.ps1 ${{ github.workspace }}\project.json -destination_folder ${{ github.workspace }}\package 
-    - name: Upload UiPath Artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: Artifacts
-        path: |
-          package/*.*
-          scripts/*.ps1
-           
- publish-uipath-nuget-package:
-   needs: update_version_build-uipath-nuget-package
-   runs-on: windows-latest
-   steps: 
-    - name: Download UiPath Artifacts
-      uses: actions/download-artifact@v2
-      with:
-        name: Artifacts
-    - name: Publish Nuget Package to DEV
-      shell: pwsh
-      run: ${{ github.workspace }}\scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -UserKey ${{env.ORCH_USER_KEY}} -account_name ${{env.ORCH_ACC_NAME}}
- 
 
-
-
-
-        
  
