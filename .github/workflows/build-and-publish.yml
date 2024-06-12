@@ -1,10 +1,9 @@
 name: Build and Publish workflow
 
 on:
-  workflow_run:
-    workflows: ["Update Version"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 env:
  PROJECT_NAME: Test_GitHubActions 
