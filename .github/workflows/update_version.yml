@@ -3,7 +3,7 @@ name: Update Version
 on:
   push:
     branches:
-      - main
+      - main1
   workflow_dispatch:
 
 jobs:
