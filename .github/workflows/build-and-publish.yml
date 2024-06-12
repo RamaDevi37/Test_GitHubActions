@@ -45,12 +45,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
  
-    - name: Install PowerShell
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y powershell
-        pwsh -v  # Verify the installation
- 
     - name: Set File Permissions
       run: |
         chmod 644 project.json
